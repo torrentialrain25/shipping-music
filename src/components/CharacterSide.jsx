@@ -175,7 +175,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
               style={{
                 width: '100%', height: DESC_H, background: 'transparent', border: 'none',
                 borderBottom: `1px solid ${C.inputBorder}`, outline: 'none',
-                resize: 'none', overflowY: 'hidden', fontSize: isMobile ? '11px' : '13px', lineHeight: 1.7,
+                resize: 'none', overflowY: 'hidden', fontSize: isMobile ? '9px' : '13px', lineHeight: 1.7,
                 color: C.text, textAlign: align, paddingBottom: '4px', fontFamily: 'inherit',
                 boxSizing: 'border-box',
               }}
@@ -187,7 +187,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
         ) : isMobile ? (
           char.text ? (
             <div style={{ overflow: 'hidden', marginBottom: '4px' }}>
-              <p style={{ fontSize: '11px', lineHeight: 1.7, letterSpacing: '0.08em', color: C.text, textAlign: align, whiteSpace: 'pre-wrap', margin: 0 }}>
+              <p style={{ fontSize: '9px', lineHeight: 1.7, letterSpacing: '0.08em', color: C.text, textAlign: align, whiteSpace: 'pre-wrap', margin: 0 }}>
                 {char.text}
               </p>
             </div>
@@ -211,13 +211,13 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
             style={{
               background: 'transparent', border: 'none',
               borderBottom: `1px solid ${C.inputBorder}`,
-              outline: 'none', fontSize: isMobile ? '13px' : '16px', letterSpacing: '0.05em', fontWeight: 700,
+              outline: 'none', fontSize: isMobile ? '12px' : '16px', letterSpacing: '0.05em', fontWeight: 700,
               color: C.name, textAlign: align, paddingBottom: '3px',
               width: '100%', fontFamily: 'inherit', marginBottom: '6px',
             }}
           />
         ) : char.name ? (
-          <span style={{ fontSize: isMobile ? '13px' : '16px', letterSpacing: '0.05em', fontWeight: 700, color: C.name, display: 'block', textAlign: align, marginBottom: '6px' }}>
+          <span style={{ fontSize: isMobile ? '12px' : '16px', letterSpacing: '0.05em', fontWeight: 700, color: C.name, display: 'block', textAlign: align, marginBottom: '6px' }}>
             {char.name}
           </span>
         ) : null}
