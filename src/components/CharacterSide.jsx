@@ -46,6 +46,8 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
   const [searchError,   setSearchError]   = useState(false)
 
   const isMobile = useIsMobile(480)
+  const fsUI    = isMobile ? '10px' : '12px'
+  const fsSmall = isMobile ? '9px'  : '11px'
   const music    = char.music || {}
   const mode     = music.mode || 'iframe'
   const src      = music.iframeSrc || ''
@@ -142,13 +144,13 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
   const inputStyle = (err) => ({
     flex: 1, minWidth: 0, background: 'transparent', border: 'none',
     borderBottom: `1px solid ${err ? C.error : C.inputBorder}`,
-    outline: 'none', fontSize: '10px', color: C.text,
+    outline: 'none', fontSize: fsUI, color: C.text,
     padding: '2px 0 3px', fontFamily: 'inherit',
   })
 
   const btnStyle = {
     flexShrink: 0, background: 'none', border: `1px solid ${C.inputBorder}`,
-    color: C.dim, fontSize: '10px', padding: '2px 8px', cursor: 'pointer', letterSpacing: '0.1em',
+    color: C.dim, fontSize: fsUI, padding: '2px 8px', cursor: 'pointer', letterSpacing: '0.1em',
   }
 
   // ── Render ─────────────────────────────────────────────────────────────
@@ -162,7 +164,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
         />
       )}
 
-      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0, ...(isMobile && !isEditing && { justifyContent: 'flex-end' }) }}>
+      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0, ...(!isEditing && { justifyContent: 'flex-end' }) }}>
 
         {/* Description — fixed height spacer on desktop; collapses on mobile */}
         {isEditing ? (
@@ -180,7 +182,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
                 boxSizing: 'border-box',
               }}
             />
-            <div style={{ fontSize: '9px', color: C.dim, textAlign: 'right', marginTop: '2px' }}>
+            <div style={{ fontSize: fsSmall, color: C.dim, textAlign: 'right', marginTop: '2px' }}>
               {char.text.length}/50
             </div>
           </div>
@@ -237,7 +239,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
               style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
           ) : isEditing ? (
             <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ fontSize: '10px', letterSpacing: '0.12em', color: C.dim }}>点击上传</span>
+              <span style={{ fontSize: fsUI, letterSpacing: '0.12em', color: C.dim }}>点击上传</span>
             </div>
           ) : null}
 
@@ -247,7 +249,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
               onMouseEnter={e => e.currentTarget.style.opacity = '1'}
               onMouseLeave={e => e.currentTarget.style.opacity = '0'}
             >
-              <span style={{ fontSize: '10px', letterSpacing: '0.12em', color: '#fff' }}>更换图片</span>
+              <span style={{ fontSize: fsUI, letterSpacing: '0.12em', color: '#fff' }}>更换图片</span>
             </div>
           )}
           <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleFileSelect} />
@@ -264,7 +266,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
                   key={m}
                   onClick={() => setMode(m)}
                   style={{
-                    flex: 1, padding: '4px 0', fontSize: '10px', letterSpacing: '0.08em', cursor: 'pointer', border: 'none',
+                    flex: 1, padding: '4px 0', fontSize: fsUI, letterSpacing: '0.08em', cursor: 'pointer', border: 'none',
                     background: mode === m ? '#484848' : 'transparent',
                     color: mode === m ? '#fff' : C.dim,
                     transition: 'background 0.15s, color 0.15s',
@@ -292,7 +294,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
                   </button>
                 </div>
                 {searchError && (
-                  <span style={{ fontSize: '9px', color: C.error }}>未找到结果，请换词或粘贴链接</span>
+                  <span style={{ fontSize: fsSmall, color: C.error }}>未找到结果，请换词或粘贴链接</span>
                 )}
 
                 {/* Search results */}
@@ -308,8 +310,8 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
                       >
                         {r.cover && <img src={r.cover} alt="" style={{ width: 28, height: 28, objectFit: 'cover', borderRadius: '2px', flexShrink: 0 }} />}
                         <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ fontSize: '10px', fontWeight: 500, color: C.text, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.title}</div>
-                          <div style={{ fontSize: '9px', color: C.dim, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.artist}</div>
+                          <div style={{ fontSize: fsUI, fontWeight: 500, color: C.text, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.title}</div>
+                          <div style={{ fontSize: fsSmall, color: C.dim, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.artist}</div>
                         </div>
                       </div>
                     ))}
@@ -319,7 +321,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
                 {/* Divider */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <div style={{ flex: 1, height: '1px', background: C.inputBorder }} />
-                  <span style={{ fontSize: '9px', color: C.dim, flexShrink: 0 }}>或粘贴链接</span>
+                  <span style={{ fontSize: fsSmall, color: C.dim, flexShrink: 0 }}>或粘贴链接</span>
                   <div style={{ flex: 1, height: '1px', background: C.inputBorder }} />
                 </div>
 
@@ -334,14 +336,14 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
                   />
                   <button onClick={importMusic} style={btnStyle}>导入</button>
                 </div>
-                {urlError && <span style={{ fontSize: '10px', color: C.error }}>无法识别该链接</span>}
-                <span style={{ fontSize: '9px', color: C.dim }}>如遇版权受限，建议使用 Bilibili 链接</span>
+                {urlError && <span style={{ fontSize: fsUI, color: C.error }}>无法识别该链接</span>}
+                <span style={{ fontSize: fsSmall, color: C.dim }}>如遇版权受限，建议使用 Bilibili 链接</span>
 
                 {/* Selected indicator */}
                 {hasMusic && !urlError && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '10px', color: '#777' }}>✓ {pLabel} 已导入</span>
-                    <button onClick={clearMusic} style={{ fontSize: '10px', color: C.dim, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                    <span style={{ fontSize: fsUI, color: '#777' }}>✓ {pLabel} 已导入</span>
+                    <button onClick={clearMusic} style={{ fontSize: fsUI, color: C.dim, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
                       移除
                     </button>
                   </div>
@@ -364,7 +366,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
                   {music.customData?.coverImageBlob ? (
                     <img src={music.customData.coverImageBlob} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   ) : (
-                    <span style={{ fontSize: '10px', letterSpacing: '0.12em', color: C.dim }}>+ 上传封面</span>
+                    <span style={{ fontSize: fsUI, letterSpacing: '0.12em', color: C.dim }}>+ 上传封面</span>
                   )}
                   {music.customData?.coverImageBlob && (
                     <div
@@ -372,7 +374,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
                       onMouseEnter={e => e.currentTarget.style.opacity = '1'}
                       onMouseLeave={e => e.currentTarget.style.opacity = '0'}
                     >
-                      <span style={{ fontSize: '10px', color: '#fff' }}>更换封面</span>
+                      <span style={{ fontSize: fsUI, color: '#fff' }}>更换封面</span>
                     </div>
                   )}
                 </div>
@@ -380,7 +382,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
 
                 {/* Audio upload */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ flex: 1, fontSize: '10px', color: music.customData?.audioBlob ? '#777' : C.dim, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <span style={{ flex: 1, fontSize: fsUI, color: music.customData?.audioBlob ? '#777' : C.dim, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {music.customData?.audioBlob ? '♪ 已上传音频' : '未上传音频（仅展示）'}
                   </span>
                   <button onClick={() => customAudioRef.current?.click()} style={btnStyle}>
@@ -389,7 +391,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
                   {music.customData?.audioBlob && (
                     <button
                       onClick={() => onChange({ music: { ...music, customData: { ...music.customData, audioBlob: null } } })}
-                      style={{ fontSize: '10px', color: C.dim, background: 'none', border: 'none', cursor: 'pointer', padding: 0, flexShrink: 0 }}
+                      style={{ fontSize: fsUI, color: C.dim, background: 'none', border: 'none', cursor: 'pointer', padding: 0, flexShrink: 0 }}
                     >
                       移除
                     </button>
@@ -411,7 +413,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
                 />
 
                 {hasMusic && (
-                  <button onClick={clearMusic} style={{ alignSelf: 'flex-start', fontSize: '10px', color: C.dim, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                  <button onClick={clearMusic} style={{ alignSelf: 'flex-start', fontSize: fsUI, color: C.dim, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
                     清除
                   </button>
                 )}

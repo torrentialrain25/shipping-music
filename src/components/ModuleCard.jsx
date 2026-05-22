@@ -54,13 +54,13 @@ export default function ModuleCard({ module, onUpdate, onDelete, readOnly = fals
         <div data-export-hide style={{ position: 'absolute', top: '10px', right: '14px', display: 'flex', gap: '12px' }}>
           <button
             onClick={() => setIsEditing((v) => !v)}
-            style={{ fontSize: '10px', letterSpacing: '0.18em', color: isEditing ? '#555' : DIM, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            style={{ fontSize: isMobile ? '10px' : '12px', letterSpacing: '0.18em', color: isEditing ? '#555' : DIM, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
           >
             {isEditing ? '完成' : '编辑'}
           </button>
           <button
             onClick={onDelete}
-            style={{ fontSize: '10px', color: '#d0cec9', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            style={{ fontSize: isMobile ? '10px' : '12px', color: '#d0cec9', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
           >
             删除
           </button>
@@ -90,7 +90,7 @@ export default function ModuleCard({ module, onUpdate, onDelete, readOnly = fals
       </div>
 
       {/* ── [♪A] [CharA] | [CharB] [♪B] ──────────────────────── */}
-      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      <div style={{ display: 'flex' }}>
 
         <div style={{ flex: 1, display: 'flex', flexDirection: 'row', alignItems: 'stretch', gap: '12px', minWidth: 0 }}>
           {showMusicSlot && (

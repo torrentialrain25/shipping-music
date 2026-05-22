@@ -6,7 +6,7 @@ export async function onRequestGet(context) {
     headers: { 'Content-Type': 'application/json' },
   })
 
-  const url = `https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=8&country=CN`
+  const url = `https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=10&country=US`
   try {
     const r = await fetch(url)
     const data = await r.json()
