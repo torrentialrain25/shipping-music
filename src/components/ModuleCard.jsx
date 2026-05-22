@@ -77,12 +77,12 @@ export default function ModuleCard({ module, onUpdate, onDelete, readOnly = fals
             placeholder="CP名称"
             style={{
               background: 'transparent', border: 'none', borderBottom: `1px solid ${LINE}`,
-              outline: 'none', textAlign: 'center', fontSize: '15px', letterSpacing: '0.2em',
+              outline: 'none', textAlign: 'center', fontSize: isMobile ? '13px' : '15px', letterSpacing: '0.2em',
               color: TITLE, minWidth: '60px', padding: '0 4px 2px', fontFamily: 'inherit', fontWeight: 700,
             }}
           />
         ) : (
-          <span style={{ fontSize: '15px', letterSpacing: '0.2em', color: TITLE, whiteSpace: 'nowrap', fontWeight: 700 }}>
+          <span style={{ fontSize: isMobile ? '13px' : '15px', letterSpacing: '0.2em', color: TITLE, whiteSpace: 'nowrap', fontWeight: 700 }}>
             {module.title || '——'}
           </span>
         )}

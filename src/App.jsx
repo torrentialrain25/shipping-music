@@ -3,6 +3,7 @@ import ModuleCard from './components/ModuleCard'
 import ShareModal from './components/ShareModal'
 import ShareView from './pages/ShareView'
 import { createShare } from './lib/shareUtils'
+import { useIsMobile } from './utils/useIsMobile'
 
 let _id = 1
 const createModule = () => ({
@@ -12,11 +13,10 @@ const createModule = () => ({
   charB: { name: '', text: '', imageBlobUrl: null, music: { rawUrl: '', iframeSrc: '', audioUrl: '', coverUrl: '', customTitle: '', customArtist: '', mode: 'iframe', customData: { songName: '', artist: '', coverImageBlob: null, audioBlob: null } } },
 })
 
-const PAGE_BG         = '#0e0e0f'
-const CARD_GAP        = '10px'
-const DESIGN_W        = 880
-const MOBILE_DESIGN_W = 540
-const MOBILE_BP       = 480
+const PAGE_BG   = '#0e0e0f'
+const CARD_GAP  = '10px'
+const DESIGN_W  = 880
+const MOBILE_BP = 480
 
 function getShareIdFromHash() {
   const m = window.location.hash.match(/^#\/share\/([0-9a-f-]{36})$/)
@@ -41,6 +41,7 @@ function Editor() {
   const [sharing,  setSharing]  = useState(false)
   const [shareUrl, setShareUrl] = useState(null)
   const innerRef = useRef(null)
+  const isMobile = useIsMobile(MOBILE_BP)
 
   const addModule = () => setModules((p) => [...p, createModule()])
 
@@ -55,9 +56,13 @@ function Editor() {
   useEffect(() => {
     const update = () => {
       const vw = window.innerWidth
-      const dw = vw < MOBILE_BP ? MOBILE_DESIGN_W : DESIGN_W
-      setActiveDesignW(dw)
-      setScale(vw < dw ? vw / dw : 1)
+      if (vw < MOBILE_BP) {
+        setActiveDesignW(vw)
+        setScale(1)
+      } else {
+        setActiveDesignW(DESIGN_W)
+        setScale(vw < DESIGN_W ? vw / DESIGN_W : 1)
+      }
     }
     update()
     window.addEventListener('resize', update)
@@ -105,7 +110,7 @@ function Editor() {
         {/* ── Page header ───────────────────────────────────────────── */}
         <header
           style={{
-            padding: '36px 20px 28px',
+            padding: isMobile ? '20px 16px 14px' : '36px 20px 28px',
             background: PAGE_BG,
             position: 'relative',
             maxWidth: '880px',
@@ -121,7 +126,7 @@ function Editor() {
                 style={{
                   background: 'transparent', border: 'none',
                   borderBottom: '1px solid rgba(255,255,255,0.2)',
-                  outline: 'none', color: '#fff', fontSize: '26px',
+                  outline: 'none', color: '#fff', fontSize: isMobile ? '19px' : '26px',
                   fontWeight: '700', letterSpacing: '0.04em',
                   width: '100%', padding: '0 0 4px', textAlign: 'center',
                 }}
@@ -153,7 +158,7 @@ function Editor() {
             <div onClick={() => setEditingHeader(true)} style={{ cursor: 'pointer', textAlign: 'center' }} title="点击编辑标题">
               <h1
                 style={{
-                  color: '#fff', fontSize: '26px', fontWeight: '700',
+                  color: '#fff', fontSize: isMobile ? '19px' : '26px', fontWeight: '700',
                   letterSpacing: '0.04em', lineHeight: '1.2', margin: 0,
                 }}
               >
