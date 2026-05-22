@@ -20,7 +20,8 @@ export function parseMusicUrl(url) {
   const neSong =
     u.match(/music\.163\.com[^?]*[#&?](?:.*\/)?song[?/](?:id=)?(\d+)/) ||
     u.match(/song\?id=(\d+)/) ||
-    u.match(/\/song\/(\d+)/)
+    u.match(/\/song\/(\d+)/) ||
+    (u.includes('music.163.com') && u.includes('song') && u.match(/[?&]id=(\d+)/))
   if (neSong) return `//music.163.com/outchain/player?type=2&id=${neSong[1]}&auto=0&height=66`
 
   const neList =
