@@ -171,23 +171,23 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
               value={char.text}
               onChange={(e) => onChange({ text: e.target.value })}
               placeholder="角色描述…"
-              maxLength={80}
+              maxLength={50}
               style={{
                 width: '100%', height: DESC_H, background: 'transparent', border: 'none',
                 borderBottom: `1px solid ${C.inputBorder}`, outline: 'none',
-                resize: 'none', overflowY: 'hidden', fontSize: isMobile ? '9px' : '13px', lineHeight: 1.7,
+                resize: 'none', overflowY: 'hidden', fontSize: isMobile ? '8px' : '13px', lineHeight: 1.7,
                 color: C.text, textAlign: align, paddingBottom: '4px', fontFamily: 'inherit',
                 boxSizing: 'border-box',
               }}
             />
             <div style={{ fontSize: '9px', color: C.dim, textAlign: 'right', marginTop: '2px' }}>
-              {char.text.length}/80
+              {char.text.length}/50
             </div>
           </div>
         ) : isMobile ? (
           char.text ? (
             <div style={{ overflow: 'hidden', marginBottom: '4px' }}>
-              <p style={{ fontSize: '9px', lineHeight: 1.7, letterSpacing: '0.08em', color: C.text, textAlign: align, whiteSpace: 'pre-wrap', margin: 0 }}>
+              <p style={{ fontSize: '8px', lineHeight: 1.7, letterSpacing: '0.08em', color: C.text, textAlign: align, whiteSpace: 'pre-wrap', margin: 0 }}>
                 {char.text}
               </p>
             </div>
@@ -195,7 +195,7 @@ export default function CharacterSide({ char, side, isEditing, onChange }) {
         ) : (
           <div style={{ height: DESC_H, overflow: 'hidden', marginBottom: 'auto' }}>
             {char.text && (
-              <p style={{ fontSize: '13px', lineHeight: 1.7, letterSpacing: '0.08em', color: C.text, textAlign: align, whiteSpace: 'pre-wrap', margin: 0 }}>
+              <p style={{ fontSize: isMobile ? '8px' : '13px', lineHeight: 1.7, letterSpacing: '0.08em', color: C.text, textAlign: align, whiteSpace: 'pre-wrap', margin: 0 }}>
                 {char.text}
               </p>
             )}
