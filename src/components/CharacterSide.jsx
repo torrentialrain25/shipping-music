@@ -17,20 +17,8 @@ const IMG_SIZE_MOBILE = 90
 const DESC_H          = 88
 
 async function searchItunes(query) {
-  const apiUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=song&limit=8&country=CN`
-
-  let res
-  try {
-    const ctrl = new AbortController()
-    const tid = setTimeout(() => ctrl.abort(), 4000)
-    res = await fetch(apiUrl, { signal: ctrl.signal })
-    clearTimeout(tid)
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
-  } catch {
-    // Fallback via corsproxy.io (same proxy already used for NetEase/Bilibili)
-    res = await fetch(`https://corsproxy.io/?${encodeURIComponent(apiUrl)}`)
-  }
-
+  const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`)
+  if (!res.ok) throw new Error(`HTTP ${res.status}`)
   const data = await res.json()
   return (data.results || []).map(r => ({
     title:      r.trackName      || '',
