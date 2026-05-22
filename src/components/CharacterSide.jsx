@@ -21,14 +21,14 @@ async function searchItunes(query) {
 
   let res
   try {
-    // Direct fetch with 4s timeout; may be blocked on mobile networks in China
     const ctrl = new AbortController()
     const tid = setTimeout(() => ctrl.abort(), 4000)
     res = await fetch(apiUrl, { signal: ctrl.signal })
     clearTimeout(tid)
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
   } catch {
-    // Fallback via proxy when direct access is blocked
-    res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`)
+    // Fallback via corsproxy.io (same proxy already used for NetEase/Bilibili)
+    res = await fetch(`https://corsproxy.io/?${encodeURIComponent(apiUrl)}`)
   }
 
   const data = await res.json()
